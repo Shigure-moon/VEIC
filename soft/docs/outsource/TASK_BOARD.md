@@ -93,6 +93,8 @@
 
 ### P1.2 Command Palette 骨架
 
+状态：已完成第一版，等待真实 Workspace capability 数据验收。
+
 目标：建立 `Ctrl+K` 操作入口。
 
 第一版只做：

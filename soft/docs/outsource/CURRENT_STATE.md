@@ -80,6 +80,16 @@ Updated: 2026-07-13
 - 结果显示 source、time/revision/meta；
 - Resource 相关命中只打开本地 Resource detail，不执行 invocation。
 
+### Command Palette
+
+- `Ctrl+K` 全局命令入口；
+- 本地索引 Resource；
+- 本地索引 Capability；
+- 支持打开 Resource detail；
+- Capability 结果只写入本地 command intent log；
+- 不执行 invocation；
+- 不绕过后端 provider policy。
+
 ## 尚未实现
 
 - Workspace 创建/加入/审批 UI；
@@ -87,7 +97,6 @@ Updated: 2026-07-13
 - Resource Twin 独立详情页；
 - Capability invocation UI；
 - MCP server/tool UI；
-- Command Palette；
 - Simulation；
 - Agent Goals/Tasks/Notices；
 - Runtime installer/repair UI；
@@ -104,6 +113,6 @@ Updated: 2026-07-13
 
 ## 下一阶段建议任务
 
-1. 增加 Command Palette 骨架，但只生成本地 command intent 日志，不执行高风险动作。
-2. 补 Resource Twin 独立详情页。
-3. 补最小 UI smoke test。
+1. 补 Resource Twin 独立详情页。
+2. 补最小 UI smoke test。
+3. 为 Command Palette 接入后端 command intent / provider policy 只读预检接口。

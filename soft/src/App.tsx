@@ -5,6 +5,7 @@ import {
   normalizeApiBaseUrl,
 } from "./api/client";
 import { AccountPanel } from "./components/account/AccountPanel";
+import { CommandPalette } from "./components/command/CommandPalette";
 import { RuntimeLogPanel } from "./components/logs/RuntimeLogPanel";
 import { RuntimeNodeSurface } from "./components/runtime/RuntimeNodeSurface";
 import { WorkspaceSearch } from "./components/search/WorkspaceSearch";
@@ -402,6 +403,15 @@ export default function App() {
         resourceDetail={resourceDetail}
         selectedResourceId={selectedResourceId}
         onSelectResource={setSelectedResourceId}
+      />
+
+      <CommandPalette
+        enabled={isLoggedIn}
+        resources={resources}
+        resourceDetail={resourceDetail}
+        selectedResourceId={selectedResourceId}
+        onSelectResource={setSelectedResourceId}
+        onRecordCommandIntent={(message) => recordLog("info", message)}
       />
     </div>
   );
