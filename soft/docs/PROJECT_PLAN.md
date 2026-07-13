@@ -82,12 +82,13 @@ Updated: 2026-07-13
 | Resource publish / heartbeat / offline | Implemented first pass |
 | Timeline live sync | Implemented with long-poll `/events/wait` plus `/sync` cursor cache |
 | Resource Explorer | Implemented first pass from Workspace state snapshot |
+| Workspace Search | Implemented first local read-only pass |
 | C4 documentation | SVG diagrams are the primary rendered diagrams |
 
 Progress estimate:
 
-- Current `soft` desktop MVP: about 42%.
-- Full P3 Agent Runtime desktop vision: about 24%.
+- Current `soft` desktop MVP: about 46%.
+- Full P3 Agent Runtime desktop vision: about 26%.
 
 ## Milestones
 

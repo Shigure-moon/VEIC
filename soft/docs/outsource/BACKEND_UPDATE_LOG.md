@@ -118,3 +118,39 @@ Notes:
   - Server `.veicrun.json` is ignored as local agent configuration.
   - `deploy/headscale/config/config.yaml` contains staging config only, no private key material.
   - Full `--suite all` was not rerun during this commit; contract suite is the baseline verification.
+
+## 2026-07-13 - Post-baseline server commits, no OpenAPI contract delta
+
+Owner:
+  backend-agent / frontend-agent sync.
+
+OpenAPI:
+  Current `server` commit `70004dd` (`VEIC-011 server: add multi-turn runtime evaluation workflow`).
+  `git diff 1ad51b7..70004dd -- openapi.yaml` returned no changes.
+
+Changed endpoints:
+  - None.
+
+Backend commits reviewed:
+  - `672ee0b` VEIC-006 server: upsert resource capabilities by key
+  - `c4f8a01` VEIC-007 server: archive workspace events by retention policy
+  - `d070b65` VEIC-008 server: guard maintenance with postgres lease
+  - `70cddee` VEIC-009 server: export agent runtime trajectories
+  - `8a91d69` VEIC-010 server: evaluate agent runtime trajectories
+  - `70004dd` VEIC-011 server: add multi-turn runtime evaluation workflow
+
+Frontend impact:
+  - No new endpoint wrapper required.
+  - Existing Resource Detail hydration remains aligned with the baseline OpenAPI.
+  - Agent Runtime trajectory export/evaluation is currently backend tooling, not a desktop API surface.
+
+Migration:
+  - `scripts/coord/veic-coord.ps1 sync-api`
+  - `scripts/coord/veic-coord.ps1 check -Area soft`
+
+Acceptance:
+  - `sync-api` passed.
+  - `check -Area soft` passed.
+
+Notes:
+  - If Agent Runtime trajectory export/evaluation becomes user-facing, request a dedicated OpenAPI endpoint and update `src/api/client.ts` only after the contract lands.

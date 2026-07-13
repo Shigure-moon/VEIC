@@ -49,6 +49,12 @@ Updated: 2026-07-13
 - offline；
 - Resource Explorer 第一版；
 - endpoint/capability/twin 摘要展示。
+- Resource Detail 只读 hydrate：
+  - `GET /resources/{resourceId}/capabilities`；
+  - `GET /resources/{resourceId}/twin`；
+  - `GET /resources/{resourceId}/twin/drifts`；
+  - `GET /invocations?resourceId=`；
+  - `GET /invocations/{capabilityInvocationId}/execution-events`。
 
 ### Timeline
 
@@ -59,6 +65,21 @@ Updated: 2026-07-13
 - Timeline 清空；
 - Runtime Log。
 
+### Workspace Search
+
+- 本地只读搜索入口；
+- 搜索范围：
+  - Workspace；
+  - Members；
+  - Resources / Endpoints / Capabilities；
+  - 当前选中 Resource 的 Twin / Drift / Invocations / Execution Events；
+  - Timeline events；
+  - Runtime logs；
+- 不调用 LLM；
+- 不编造答案；
+- 结果显示 source、time/revision/meta；
+- Resource 相关命中只打开本地 Resource detail，不执行 invocation。
+
 ## 尚未实现
 
 - Workspace 创建/加入/审批 UI；
@@ -66,8 +87,6 @@ Updated: 2026-07-13
 - Resource Twin 独立详情页；
 - Capability invocation UI；
 - MCP server/tool UI；
-- Invocation execution events hydration；
-- Workspace Search；
 - Command Palette；
 - Simulation；
 - Agent Goals/Tasks/Notices；
@@ -78,18 +97,13 @@ Updated: 2026-07-13
 
 ## 当前风险
 
-- `App.tsx` 已经偏大，继续加功能前应拆分组件和 hooks；
 - `src-tauri/src/main.rs` 也会继续膨胀，需要按 cache/keychain/probe/window 拆模块；
 - Timeline 目前用 long-poll，不是 SSE；
-- Resource Explorer 只使用 snapshot，不主动 hydrate twin drift/history；
 - 本地 runtime probe 依赖 `tailscale` CLI 是否存在；
 - API 错误展示还比较原始。
 
 ## 下一阶段建议任务
 
-1. 拆分 `App.tsx`。
-2. 做 Workspace Search 的本地只读版本。
-3. 增加 Command Palette 骨架，但只生成本地 command intent 日志，不执行高风险动作。
-4. 补 Resource Detail 页面，接 twin/drift/history 接口。
-5. 补最小 UI smoke test。
-
+1. 增加 Command Palette 骨架，但只生成本地 command intent 日志，不执行高风险动作。
+2. 补 Resource Twin 独立详情页。
+3. 补最小 UI smoke test。

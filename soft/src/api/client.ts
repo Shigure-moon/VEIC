@@ -5,6 +5,7 @@ export type Schema<K extends keyof components["schemas"]> = components["schemas"
 export type JsonObject = Record<string, unknown>;
 export type WorkspaceEvent = Schema<"WorkspaceEvent">;
 export type WorkspaceSync = Schema<"WorkspaceSync">;
+export type CapabilityInvocation = Schema<"CapabilityInvocation">;
 
 export type ApiBaseConfig = {
   baseUrl: string;
@@ -117,6 +118,34 @@ export class VeicApiClient {
     }));
   }
 
+  listResources(workspaceId: string) {
+    return this.send(this.client.GET("/api/v2/workspaces/{workspaceId}/resources", {
+      headers: this.headers(),
+      params: { path: { workspaceId } },
+    }));
+  }
+
+  getResourceTwinState(workspaceId: string, resourceId: string) {
+    return this.send(this.client.GET("/api/v2/workspaces/{workspaceId}/resources/{resourceId}/twin", {
+      headers: this.headers(),
+      params: { path: { workspaceId, resourceId } },
+    }));
+  }
+
+  listResourceTwinDrifts(workspaceId: string, resourceId: string) {
+    return this.send(this.client.GET("/api/v2/workspaces/{workspaceId}/resources/{resourceId}/twin/drifts", {
+      headers: this.headers(),
+      params: { path: { workspaceId, resourceId } },
+    }));
+  }
+
+  listResourceCapabilities(workspaceId: string, resourceId: string) {
+    return this.send(this.client.GET("/api/v2/workspaces/{workspaceId}/resources/{resourceId}/capabilities", {
+      headers: this.headers(),
+      params: { path: { workspaceId, resourceId } },
+    }));
+  }
+
   syncWorkspace(workspaceId: string, afterRevision = 0) {
     return this.send(this.client.GET("/api/v2/workspaces/{workspaceId}/sync", {
       headers: this.headers(),
@@ -128,6 +157,27 @@ export class VeicApiClient {
     return this.send(this.client.GET("/api/v2/workspaces/{workspaceId}/events/wait", {
       headers: this.headers(),
       params: { path: { workspaceId }, query: { afterRevision, timeoutSeconds } },
+    }));
+  }
+
+  listCapabilityInvocations(workspaceId: string, resourceId?: string) {
+    return this.send(this.client.GET("/api/v2/workspaces/{workspaceId}/invocations", {
+      headers: this.headers(),
+      params: { path: { workspaceId }, query: resourceId ? { resourceId } : undefined },
+    }));
+  }
+
+  getCapabilityInvocation(workspaceId: string, capabilityInvocationId: string) {
+    return this.send(this.client.GET("/api/v2/workspaces/{workspaceId}/invocations/{capabilityInvocationId}", {
+      headers: this.headers(),
+      params: { path: { workspaceId, capabilityInvocationId } },
+    }));
+  }
+
+  listCapabilityInvocationExecutionEvents(workspaceId: string, capabilityInvocationId: string) {
+    return this.send(this.client.GET("/api/v2/workspaces/{workspaceId}/invocations/{capabilityInvocationId}/execution-events", {
+      headers: this.headers(),
+      params: { path: { workspaceId, capabilityInvocationId } },
     }));
   }
 
