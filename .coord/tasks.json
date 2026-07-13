@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-13T15:15:35+08:00",
+  "updatedAt": "2026-07-13T15:29:44+08:00",
   "tasks": [
     {
       "id": "VEIC-001",
@@ -150,6 +150,20 @@
       "notes": [
         "2026-07-13T15:15:24+08:00 server commit 8a91d69; py_compile, demo export/eval, and Docker migrated empty export/eval passed",
         "2026-07-13T15:15:35+08:00 Deterministic Agent Runtime dataset evaluator implemented"
+      ]
+    },
+    {
+      "id": "VEIC-011",
+      "title": "Add multi-turn runtime evaluation workflow",
+      "area": "server",
+      "status": "done",
+      "owner": "backend-agent",
+      "branch": "master",
+      "updatedAt": "2026-07-13T15:29:44+08:00",
+      "checks": [],
+      "notes": [
+        "2026-07-13T15:29:43+08:00 server commit 70004dd; py_compile and single/multi-turn demo export/eval smoke passed",
+        "2026-07-13T15:29:44+08:00 Multi-turn trace export, optional LLM judge, CI smoke and docs implemented"
       ]
     }
   ]
