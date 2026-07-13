@@ -20,6 +20,7 @@ $TasksPath = Join-Path $CoordDir "tasks.json"
 $ReportPath = Join-Path $CoordDir "PROJECT_STATUS.md"
 $ServerDir = Join-Path $Root "server"
 $SoftDir = Join-Path $Root "soft"
+$Utf8NoBom = New-Object System.Text.UTF8Encoding -ArgumentList $false
 
 function NowIso {
   return (Get-Date).ToString("yyyy-MM-ddTHH:mm:ssK")
@@ -40,7 +41,8 @@ function Read-TasksState {
 
 function Save-TasksState($state) {
   $state.updatedAt = NowIso
-  $state | ConvertTo-Json -Depth 20 | Set-Content -Encoding UTF8 $TasksPath
+  $json = ($state | ConvertTo-Json -Depth 20) + [Environment]::NewLine
+  [System.IO.File]::WriteAllText($TasksPath, $json, $Utf8NoBom)
 }
 
 function Get-Task($state, [string]$id) {
@@ -111,6 +113,24 @@ function New-TaskId($tasks) {
 function Generate-Report {
   $state = Read-TasksState
   $tasks = @($state.tasks)
+  $staleCutoff = (Get-Date).AddDays(-2)
+  $staleActiveTasks = @()
+  foreach ($task in $tasks | Where-Object { $_.status -in @("claimed", "in_progress") }) {
+    try {
+      $updatedAt = [DateTime]::Parse([string]$task.updatedAt)
+      if ($updatedAt -lt $staleCutoff) {
+        $staleActiveTasks += $task
+      }
+    } catch {
+      $staleActiveTasks += $task
+    }
+  }
+  $blockedTasks = @($tasks | Where-Object { $_.status -eq "blocked" })
+  $contractSyncTask = @($tasks | Where-Object { $_.id -eq "VEIC-003" }) | Select-Object -First 1
+  $handoffDocs = @(
+    "soft\docs\outsource\BACKEND_UPDATE_LOG.md",
+    "soft\docs\outsource\CURRENT_STATE.md"
+  )
   $lines = New-Object System.Collections.Generic.List[string]
   $lines.Add("# VEIC Project Status")
   $lines.Add("")
@@ -140,7 +160,35 @@ function Generate-Report {
     $lines.Add("- $($task.id) [$($task.area)] $($task.title)")
   }
   $lines.Add("")
-  $lines | Set-Content -Encoding UTF8 $ReportPath
+  $lines.Add("## PM Review")
+  $lines.Add("")
+  if ($staleActiveTasks.Count -eq 0) {
+    $lines.Add("- stale active tasks: none")
+  } else {
+    foreach ($task in $staleActiveTasks | Sort-Object updatedAt, id) {
+      $lines.Add("- stale active task: $($task.id) [$($task.area)/$($task.status)] updated=$($task.updatedAt) owner=$($task.owner)")
+    }
+  }
+  if ($blockedTasks.Count -eq 0) {
+    $lines.Add("- blocked tasks: none")
+  } else {
+    foreach ($task in $blockedTasks | Sort-Object area, id) {
+      $lines.Add("- blocked task: $($task.id) [$($task.area)] $($task.title) owner=$($task.owner)")
+    }
+  }
+  if ($contractSyncTask -and $contractSyncTask.status -eq "done") {
+    $lines.Add("- contract sync: VEIC-003 done")
+  } elseif ($contractSyncTask) {
+    $lines.Add("- contract sync: VEIC-003 status=$($contractSyncTask.status)")
+  } else {
+    $lines.Add("- contract sync: VEIC-003 not tracked")
+  }
+  foreach ($doc in $handoffDocs) {
+    $exists = if (Test-Path (Join-Path $Root $doc)) { "present" } else { "missing" }
+    $lines.Add("- handoff doc: $doc $exists")
+  }
+  $lines.Add("")
+  [System.IO.File]::WriteAllLines($ReportPath, [string[]]$lines, $Utf8NoBom)
   Write-Host "Wrote $ReportPath"
 }
 

@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-13T15:29:44+08:00",
+  "updatedAt": "2026-07-13T16:36:09+08:00",
   "tasks": [
     {
       "id": "VEIC-001",
@@ -41,31 +41,35 @@
       "id": "VEIC-003",
       "title": "Backend OpenAPI change notification and client sync",
       "area": "contract",
-      "status": "todo",
-      "owner": "",
+      "status": "done",
+      "owner": "frontend-agent",
       "branch": "",
-      "updatedAt": "2026-07-13T00:00:00+08:00",
+      "updatedAt": "2026-07-13T16:22:11+08:00",
       "checks": [
         "npm run generate:api",
         "npm run check"
       ],
       "notes": [
-        "Whenever server/openapi.yaml changes, update soft/docs/outsource/BACKEND_UPDATE_LOG.md and regenerate client types."
+        "Whenever server/openapi.yaml changes, update soft/docs/outsource/BACKEND_UPDATE_LOG.md and regenerate client types.",
+        "2026-07-13T16:21:09+08:00 Checking backend commits after v2 baseline for OpenAPI impact and refreshing soft generated types.",
+        "2026-07-13T16:22:11+08:00 Reviewed server commits 672ee0b..70004dd; no openapi.yaml delta after 1ad51b7; sync-api and soft check passed."
       ]
     },
     {
       "id": "VEIC-004",
       "title": "Project monitor weekly status report",
       "area": "pm",
-      "status": "todo",
+      "status": "done",
       "owner": "pm-agent",
       "branch": "",
-      "updatedAt": "2026-07-13T00:00:00+08:00",
+      "updatedAt": "2026-07-13T16:32:31+08:00",
       "checks": [
         "scripts/coord/veic-coord.ps1 report"
       ],
       "notes": [
-        "PM agent updates .coord/PROJECT_STATUS.md and flags stale tasks."
+        "PM agent updates .coord/PROJECT_STATUS.md and flags stale tasks.",
+        "2026-07-13T16:24:23+08:00 Generating weekly project status report and checking stale tasks, blockers, contract sync, and handoff docs.",
+        "2026-07-13T16:32:31+08:00 Project status report refreshed with PM Review; no stale active tasks, no blocked tasks, contract sync done, handoff docs present."
       ]
     },
     {
@@ -164,6 +168,22 @@
       "notes": [
         "2026-07-13T15:29:43+08:00 server commit 70004dd; py_compile and single/multi-turn demo export/eval smoke passed",
         "2026-07-13T15:29:44+08:00 Multi-turn trace export, optional LLM judge, CI smoke and docs implemented"
+      ]
+    },
+    {
+      "id": "VEIC-012",
+      "title": "Add workspace search surface",
+      "area": "soft",
+      "status": "done",
+      "owner": "frontend-agent",
+      "branch": "",
+      "updatedAt": "2026-07-13T16:36:09+08:00",
+      "checks": [
+        "scripts/coord/veic-coord.ps1 check -Area soft"
+      ],
+      "notes": [
+        "2026-07-13T16:36:02+08:00 Implemented in meta commit 4ffca6d; local read-only Workspace Search uses workspace snapshots, timeline events, resources, capabilities, twin state, drifts, and runtime logs.",
+        "2026-07-13T16:36:09+08:00 Workspace Search committed as 4ffca6d; scripts/coord/veic-coord.ps1 check -Area soft passed on 2026-07-13."
       ]
     }
   ]
