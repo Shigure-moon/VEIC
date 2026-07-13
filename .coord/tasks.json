@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-13T14:50:22+08:00",
+  "updatedAt": "2026-07-13T15:15:35+08:00",
   "tasks": [
     {
       "id": "VEIC-001",
@@ -23,16 +23,18 @@
       "id": "VEIC-002",
       "title": "Add read-only resource detail hydration",
       "area": "soft",
-      "status": "todo",
-      "owner": "",
+      "status": "done",
+      "owner": "frontend-agent",
       "branch": "",
-      "updatedAt": "2026-07-13T00:00:00+08:00",
+      "updatedAt": "2026-07-13T15:13:12+08:00",
       "checks": [
         "npm run check",
         "npm run build"
       ],
       "notes": [
-        "Use existing OpenAPI only: resource twin, drift, capabilities, invocation history where available."
+        "Use existing OpenAPI only: resource twin, drift, capabilities, invocation history where available.",
+        "2026-07-13T15:06:42+08:00 Starting read-only resource detail hydration using existing OpenAPI only.",
+        "2026-07-13T15:13:12+08:00 Resource detail hydration implemented with real capability/twin/drift/invocation APIs; npm run check and npm run build passed."
       ]
     },
     {
@@ -134,6 +136,20 @@
       "notes": [
         "2026-07-13T14:50:13+08:00 server commit 70cddee; py_compile and demo JSONL export passed",
         "2026-07-13T14:50:22+08:00 AgentWorldBench-like trajectory exporter implemented"
+      ]
+    },
+    {
+      "id": "VEIC-010",
+      "title": "Evaluate Agent Runtime trajectories",
+      "area": "server",
+      "status": "done",
+      "owner": "backend-agent",
+      "branch": "master",
+      "updatedAt": "2026-07-13T15:15:35+08:00",
+      "checks": [],
+      "notes": [
+        "2026-07-13T15:15:24+08:00 server commit 8a91d69; py_compile, demo export/eval, and Docker migrated empty export/eval passed",
+        "2026-07-13T15:15:35+08:00 Deterministic Agent Runtime dataset evaluator implemented"
       ]
     }
   ]
