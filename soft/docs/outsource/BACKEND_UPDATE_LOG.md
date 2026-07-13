@@ -78,3 +78,43 @@ Notes:
 - Headscale overlay endpoint requires `machineId`.
 - Missing future APIs must go through `BACKEND_SYNC.md`.
 
+## 2026-07-13 - Server v2 backend baseline commit
+
+Owner:
+  backend-agent / Codex side.
+
+OpenAPI:
+  `server` commit `1ad51b7` (`VEIC-005 server: establish v2 backend baseline`)
+
+Changed endpoints:
+  - `GET /health/ready`
+  - Workspace membership, invite, join request, leave/delete/member removal APIs
+  - Resource publish, heartbeat, offline, release, endpoint release/disable APIs
+  - Resource Twin desired/reported/observed/drift APIs
+  - Capability provider policy APIs
+  - Generic capability invocation execution event APIs
+  - MCP server/tool/invocation lifecycle APIs
+  - Transport plan, session, connection, relay allocation, overlay enrollment and device onboarding APIs
+
+Frontend impact:
+  - `soft` should run `npm run generate:api` before continuing API work.
+  - Current desktop MVP can keep using the existing read paths.
+  - Next frontend work should hydrate Resource Detail from twin/drift/capability/invocation APIs instead of relying only on Workspace snapshot.
+  - LAN-only publishing remains invalid; UI should keep requiring overlay, IPv6 or relay endpoints.
+  - Headscale overlay endpoints still require `machineId`.
+
+Migration:
+  - `cd soft`
+  - `npm run generate:api`
+  - Update `src/api/client.ts` only for endpoints the UI actually consumes.
+  - Do not edit `src/api/schema.ts` manually.
+
+Acceptance:
+  - Backend verified with `python scripts\test_backend.py --suite contract`
+  - Result: 50 contract tests passed.
+  - Frontend handoff check: `npm run check`.
+
+Notes:
+  - Server `.veicrun.json` is ignored as local agent configuration.
+  - `deploy/headscale/config/config.yaml` contains staging config only, no private key material.
+  - Full `--suite all` was not rerun during this commit; contract suite is the baseline verification.

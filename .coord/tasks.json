@@ -1,70 +1,85 @@
-{
-  "version": 1,
-  "updatedAt": "2026-07-13T00:00:00+08:00",
-  "tasks": [
-    {
-      "id": "VEIC-001",
-      "title": "Split soft App.tsx into components and hooks",
-      "area": "soft",
-      "status": "todo",
-      "owner": "",
-      "branch": "",
-      "updatedAt": "2026-07-13T00:00:00+08:00",
-      "checks": [
-        "npm run check",
-        "npm run build"
-      ],
-      "notes": [
-        "Keep behavior unchanged. Start with shell, workspace, timeline, resource explorer, runtime log."
-      ]
-    },
-    {
-      "id": "VEIC-002",
-      "title": "Add read-only resource detail hydration",
-      "area": "soft",
-      "status": "todo",
-      "owner": "",
-      "branch": "",
-      "updatedAt": "2026-07-13T00:00:00+08:00",
-      "checks": [
-        "npm run check",
-        "npm run build"
-      ],
-      "notes": [
-        "Use existing OpenAPI only: resource twin, drift, capabilities, invocation history where available."
-      ]
-    },
-    {
-      "id": "VEIC-003",
-      "title": "Backend OpenAPI change notification and client sync",
-      "area": "contract",
-      "status": "todo",
-      "owner": "",
-      "branch": "",
-      "updatedAt": "2026-07-13T00:00:00+08:00",
-      "checks": [
-        "npm run generate:api",
-        "npm run check"
-      ],
-      "notes": [
-        "Whenever server/openapi.yaml changes, update soft/docs/outsource/BACKEND_UPDATE_LOG.md and regenerate client types."
-      ]
-    },
-    {
-      "id": "VEIC-004",
-      "title": "Project monitor weekly status report",
-      "area": "pm",
-      "status": "todo",
-      "owner": "pm-agent",
-      "branch": "",
-      "updatedAt": "2026-07-13T00:00:00+08:00",
-      "checks": [
-        "scripts/coord/veic-coord.ps1 report"
-      ],
-      "notes": [
-        "PM agent updates .coord/PROJECT_STATUS.md and flags stale tasks."
-      ]
-    }
-  ]
-}
+﻿{
+    "version":  1,
+    "updatedAt":  "2026-07-13T13:31:24+08:00",
+    "tasks":  [
+                  {
+                      "id":  "VEIC-001",
+                      "title":  "Split soft App.tsx into components and hooks",
+                      "area":  "soft",
+                      "status":  "todo",
+                      "owner":  "",
+                      "branch":  "",
+                      "updatedAt":  "2026-07-13T00:00:00+08:00",
+                      "checks":  [
+                                     "npm run check",
+                                     "npm run build"
+                                 ],
+                      "notes":  [
+                                    "Keep behavior unchanged. Start with shell, workspace, timeline, resource explorer, runtime log."
+                                ]
+                  },
+                  {
+                      "id":  "VEIC-002",
+                      "title":  "Add read-only resource detail hydration",
+                      "area":  "soft",
+                      "status":  "todo",
+                      "owner":  "",
+                      "branch":  "",
+                      "updatedAt":  "2026-07-13T00:00:00+08:00",
+                      "checks":  [
+                                     "npm run check",
+                                     "npm run build"
+                                 ],
+                      "notes":  [
+                                    "Use existing OpenAPI only: resource twin, drift, capabilities, invocation history where available."
+                                ]
+                  },
+                  {
+                      "id":  "VEIC-003",
+                      "title":  "Backend OpenAPI change notification and client sync",
+                      "area":  "contract",
+                      "status":  "todo",
+                      "owner":  "",
+                      "branch":  "",
+                      "updatedAt":  "2026-07-13T00:00:00+08:00",
+                      "checks":  [
+                                     "npm run generate:api",
+                                     "npm run check"
+                                 ],
+                      "notes":  [
+                                    "Whenever server/openapi.yaml changes, update soft/docs/outsource/BACKEND_UPDATE_LOG.md and regenerate client types."
+                                ]
+                  },
+                  {
+                      "id":  "VEIC-004",
+                      "title":  "Project monitor weekly status report",
+                      "area":  "pm",
+                      "status":  "todo",
+                      "owner":  "pm-agent",
+                      "branch":  "",
+                      "updatedAt":  "2026-07-13T00:00:00+08:00",
+                      "checks":  [
+                                     "scripts/coord/veic-coord.ps1 report"
+                                 ],
+                      "notes":  [
+                                    "PM agent updates .coord/PROJECT_STATUS.md and flags stale tasks."
+                                ]
+                  },
+                  {
+                      "id":  "VEIC-005",
+                      "title":  "Create server v2 backend baseline commit",
+                      "area":  "server",
+                      "status":  "done",
+                      "owner":  "backend-agent",
+                      "branch":  "master",
+                      "updatedAt":  "2026-07-13T13:31:24+08:00",
+                      "checks":  [
 
+                                 ],
+                      "notes":  [
+                                    "2026-07-13T13:31:23+08:00 server commit 1ad51b7; contract suite passed 50 tests",
+                                    "2026-07-13T13:31:24+08:00 Baseline commit: 1ad51b7 VEIC-005 server: establish v2 backend baseline"
+                                ]
+                  }
+              ]
+}
