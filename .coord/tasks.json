@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-13T14:23:55+08:00",
+  "updatedAt": "2026-07-13T14:50:22+08:00",
   "tasks": [
     {
       "id": "VEIC-001",
@@ -120,6 +120,20 @@
       "notes": [
         "2026-07-13T14:23:47+08:00 server commit d070b65; contract suite passed 53 tests",
         "2026-07-13T14:23:55+08:00 Postgres maintenance sweeper lease implemented"
+      ]
+    },
+    {
+      "id": "VEIC-009",
+      "title": "Export Agent Runtime trajectories",
+      "area": "server",
+      "status": "done",
+      "owner": "backend-agent",
+      "branch": "master",
+      "updatedAt": "2026-07-13T14:50:22+08:00",
+      "checks": [],
+      "notes": [
+        "2026-07-13T14:50:13+08:00 server commit 70cddee; py_compile and demo JSONL export passed",
+        "2026-07-13T14:50:22+08:00 AgentWorldBench-like trajectory exporter implemented"
       ]
     }
   ]
