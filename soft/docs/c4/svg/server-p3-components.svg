@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="780" viewBox="0 0 1280 780" role="img" aria-labelledby="title desc">
+  <title id="title">VEIC Server P3 Runtime Components</title>
+  <desc id="desc">C4 level 3 server component diagram showing auth, workspace, resource, invocation, runtime, goal, belief, memory, simulation and notice services.</desc>
+  <style>
+    .bg { fill: #050505; }
+    .boundary { fill: none; stroke: #f2f2f2; stroke-opacity: .28; stroke-width: 1.3; rx: 14; stroke-dasharray: 8 8; }
+    .box { fill: #111; stroke: #f2f2f2; stroke-opacity: .5; stroke-width: 1.2; rx: 8; }
+    .db { fill: #101010; stroke: #f2f2f2; stroke-opacity: .56; stroke-width: 1.2; }
+    .ext { fill: #0c0c0c; stroke: #f2f2f2; stroke-opacity: .34; stroke-width: 1.2; rx: 8; }
+    .title { fill: #fff; font: 700 22px "JetBrains Mono", Consolas, monospace; }
+    .h { fill: #fff; font: 700 13px "JetBrains Mono", Consolas, monospace; }
+    .p { fill: #bdbdbd; font: 11px "JetBrains Mono", Consolas, monospace; }
+    .line { stroke: #f2f2f2; stroke-opacity: .42; stroke-width: 1.1; fill: none; marker-end: url(#arrow); }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 z" fill="#f2f2f2" fill-opacity=".58" />
+    </marker>
+  </defs>
+  <rect class="bg" width="1280" height="780" />
+  <text x="48" y="58" class="title">C4 L3 - Server P3 Runtime Components</text>
+  <text x="48" y="84" class="p">P3 turns connectivity records into a unified runtime: facts, beliefs, goals, plans and execution history.</text>
+
+  <rect x="52" y="120" width="884" height="560" class="boundary" />
+  <text x="80" y="156" class="h">VEIC Portal API v2</text>
+
+  <rect x="92" y="198" width="170" height="68" class="box" />
+  <text x="134" y="226" class="h">Auth / Policy</text>
+  <text x="116" y="248" class="p">membership, provider policy</text>
+  <rect x="310" y="198" width="170" height="68" class="box" />
+  <text x="344" y="226" class="h">Workspace</text>
+  <text x="336" y="248" class="p">snapshot, sync, events</text>
+  <rect x="528" y="198" width="170" height="68" class="box" />
+  <text x="570" y="226" class="h">Resource</text>
+  <text x="560" y="248" class="p">endpoint, twin, caps</text>
+  <rect x="746" y="198" width="170" height="68" class="box" />
+  <text x="782" y="226" class="h">Invocation</text>
+  <text x="774" y="248" class="p">generic and MCP lifecycle</text>
+
+  <rect x="92" y="332" width="170" height="68" class="box" />
+  <text x="130" y="360" class="h">Runtime Timeline</text>
+  <text x="120" y="382" class="p">records and edges</text>
+  <rect x="310" y="332" width="170" height="68" class="box" />
+  <text x="358" y="360" class="h">Goal Runtime</text>
+  <text x="338" y="382" class="p">goals, plans, steps</text>
+  <rect x="528" y="332" width="170" height="68" class="box" />
+  <text x="566" y="360" class="h">Belief / Facts</text>
+  <text x="556" y="382" class="p">observed, believed, desired</text>
+  <rect x="746" y="332" width="170" height="68" class="box" />
+  <text x="780" y="360" class="h">Planner Memory</text>
+  <text x="776" y="382" class="p">episodes and outcomes</text>
+
+  <rect x="310" y="466" width="170" height="68" class="box" />
+  <text x="348" y="494" class="h">Simulation</text>
+  <text x="336" y="516" class="p">replay and prediction</text>
+  <rect x="528" y="466" width="170" height="68" class="box" />
+  <text x="558" y="494" class="h">Notice Controller</text>
+  <text x="556" y="516" class="p">proactive attention</text>
+
+  <ellipse cx="494" cy="620" rx="154" ry="48" class="db" />
+  <text x="446" y="612" class="h">Postgres</text>
+  <text x="390" y="638" class="p">authoritative runtime and control state</text>
+
+  <rect x="1010" y="224" width="220" height="86" class="ext" />
+  <text x="1054" y="258" class="h">Capability Providers</text>
+  <text x="1026" y="282" class="p">Native, MCP, A2A, resources</text>
+  <rect x="1010" y="472" width="220" height="86" class="ext" />
+  <text x="1050" y="506" class="h">Simulator Adapters</text>
+  <text x="1040" y="530" class="p">Replay, evaluation, prediction</text>
+
+  <path class="line" d="M262 232 L310 232" />
+  <path class="line" d="M480 232 L528 232" />
+  <path class="line" d="M698 232 L746 232" />
+  <path class="line" d="M831 266 C890 276 940 276 1010 267" />
+  <path class="line" d="M395 534 C410 574 440 590 494 592" />
+  <path class="line" d="M613 534 C600 572 560 590 516 592" />
+  <path class="line" d="M480 366 L528 366" />
+  <path class="line" d="M698 366 L746 366" />
+  <path class="line" d="M831 400 C836 468 924 516 1010 515" />
+  <path class="line" d="M177 400 C210 552 330 612 342 620" />
+  <path class="line" d="M613 266 C598 420 560 560 536 594" />
+  <path class="line" d="M395 400 C410 482 440 566 468 592" />
+</svg>

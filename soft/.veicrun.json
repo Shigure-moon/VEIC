@@ -1,0 +1,5 @@
+{
+  "model": "gpt-5.5",
+  "flags": "--dangerously-skip-permissions",
+  "cli": "codex"
+}

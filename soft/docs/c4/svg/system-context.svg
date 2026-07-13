@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-labelledby="title desc">
+  <title id="title">VEIC Workspace System Context</title>
+  <desc id="desc">C4 level 1 system context diagram for VEIC Desktop Workspace, Portal API, external resources, services, network and simulation adapters.</desc>
+  <style>
+    .bg { fill: #050505; }
+    .box { fill: #111; stroke: #f2f2f2; stroke-opacity: .52; stroke-width: 1.3; rx: 8; }
+    .boundary { fill: none; stroke: #f2f2f2; stroke-opacity: .28; stroke-width: 1.3; rx: 14; stroke-dasharray: 8 8; }
+    .person { fill: #171717; stroke: #f2f2f2; stroke-opacity: .55; stroke-width: 1.3; rx: 999; }
+    .ext { fill: #0c0c0c; stroke: #f2f2f2; stroke-opacity: .34; stroke-width: 1.2; rx: 8; }
+    .title { fill: #fff; font: 700 22px "JetBrains Mono", Consolas, monospace; }
+    .h { fill: #fff; font: 700 15px "JetBrains Mono", Consolas, monospace; }
+    .p { fill: #bdbdbd; font: 12px "JetBrains Mono", Consolas, monospace; }
+    .small { fill: #8c8c8c; font: 11px "JetBrains Mono", Consolas, monospace; }
+    .line { stroke: #f2f2f2; stroke-opacity: .44; stroke-width: 1.2; fill: none; marker-end: url(#arrow); }
+    .dash { stroke-dasharray: 5 7; }
+  </style>
+  <defs>
+    <marker id="arrow" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+      <path d="M0,0 L9,4.5 L0,9 z" fill="#f2f2f2" fill-opacity=".58" />
+    </marker>
+  </defs>
+  <rect class="bg" width="1280" height="720" />
+  <text x="48" y="58" class="title">C4 L1 - VEIC Workspace System Context</text>
+  <text x="48" y="84" class="p">Workspace first: humans, agents and machines share one authoritative operating environment.</text>
+
+  <rect x="52" y="162" width="190" height="84" class="person" />
+  <text x="82" y="196" class="h">Human Operator</text>
+  <text x="82" y="220" class="p">Observe, approve, invoke</text>
+
+  <rect x="52" y="464" width="190" height="84" class="person" />
+  <text x="100" y="498" class="h">AI Agent</text>
+  <text x="80" y="522" class="p">Read state, call capability</text>
+
+  <rect x="360" y="118" width="430" height="484" class="boundary" />
+  <text x="386" y="154" class="h">VEIC Boundary</text>
+  <text x="386" y="176" class="small">Agent Connectivity Platform</text>
+
+  <rect x="410" y="222" width="330" height="102" class="box" />
+  <text x="462" y="260" class="h">VEIC Desktop Workspace</text>
+  <text x="440" y="286" class="p">Tauri operating environment</text>
+  <text x="458" y="306" class="small">state, resources, timeline, commands</text>
+
+  <rect x="410" y="392" width="330" height="102" class="box" />
+  <text x="476" y="430" class="h">VEIC Portal API v2</text>
+  <text x="452" y="456" class="p">Control plane + runtime API</text>
+  <text x="474" y="476" class="small">auth, workspace, resource, capability</text>
+
+  <rect x="920" y="120" width="260" height="82" class="ext" />
+  <text x="958" y="154" class="h">Physical Resources</text>
+  <text x="952" y="178" class="p">Robots, PLC, sensors, cameras</text>
+
+  <rect x="920" y="248" width="260" height="82" class="ext" />
+  <text x="936" y="282" class="h">Service Providers</text>
+  <text x="942" y="306" class="p">MCP, A2A, HTTP, ROS2, MQTT</text>
+
+  <rect x="920" y="376" width="260" height="82" class="ext" />
+  <text x="936" y="410" class="h">Connectivity Plane</text>
+  <text x="954" y="434" class="p">Overlay, IPv6, relay</text>
+
+  <rect x="920" y="504" width="260" height="82" class="ext" />
+  <text x="932" y="538" class="h">Simulation Adapters</text>
+  <text x="956" y="562" class="p">Replay, prediction, evaluation</text>
+
+  <path class="line" d="M242 204 C300 204 326 254 410 270" />
+  <text x="260" y="192" class="small">uses</text>
+  <path class="line" d="M242 506 C318 506 330 448 410 444" />
+  <text x="260" y="492" class="small">agent API</text>
+  <path class="line" d="M575 324 L575 392" />
+  <text x="592" y="364" class="small">HTTPS, events</text>
+  <path class="line" d="M740 430 C820 430 834 164 920 160" />
+  <path class="line" d="M740 444 C820 444 836 292 920 288" />
+  <path class="line" d="M740 458 C822 458 836 418 920 416" />
+  <path class="line dash" d="M740 472 C820 472 836 546 920 544" />
+</svg>

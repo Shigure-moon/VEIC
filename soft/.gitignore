@@ -1,0 +1,5 @@
+node_modules
+dist
+src/api/schema.ts
+src-tauri/target
+*.log

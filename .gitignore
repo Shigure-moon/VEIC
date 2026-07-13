@@ -1,0 +1,36 @@
+# Dependency and build output
+**/node_modules/
+**/dist/
+**/build/
+**/target/
+**/.vite/
+**/coverage/
+
+# Local secrets
+**/.env
+**/.env.*
+!**/.env.example
+
+# Generated bundles and backups
+*.exe
+*.msi
+*.zip
+*.7z
+*.log
+*.tmp
+
+# Local/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+**/.aider*
+.veicrun.json
+
+# Separate repositories / references
+server/
+reference-projects/
+front/
+veicApiWeb/

@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "updatedAt": "2026-07-13T00:00:00+08:00",
+  "agents": [
+    {
+      "id": "frontend-agent",
+      "role": "Frontend implementation",
+      "scope": [
+        "soft/src",
+        "soft/src-tauri",
+        "soft/docs/outsource"
+      ],
+      "defaultBranchPrefix": "agent/frontend/",
+      "rules": [
+        "Use real API client only",
+        "Do not add mock workspace/resource data",
+        "Run npm run check before handoff"
+      ]
+    },
+    {
+      "id": "backend-agent",
+      "role": "Server implementation",
+      "scope": [
+        "server"
+      ],
+      "defaultBranchPrefix": "agent/backend/",
+      "rules": [
+        "Update server/openapi.yaml for API changes",
+        "Run backend contract tests before handoff",
+        "Record frontend impact in backend update log"
+      ]
+    },
+    {
+      "id": "pm-agent",
+      "role": "Project monitor",
+      "scope": [
+        ".coord",
+        "docs/coordination",
+        "soft/docs/outsource"
+      ],
+      "defaultBranchPrefix": "agent/pm/",
+      "rules": [
+        "Prefer status and documentation changes",
+        "Do not modify production code unless explicitly assigned",
+        "Keep task state and reports current"
+      ]
+    },
+    {
+      "id": "integrator",
+      "role": "Cross-stack integrator",
+      "scope": [
+        "soft",
+        "server",
+        "docs",
+        "scripts"
+      ],
+      "defaultBranchPrefix": "agent/integrator/",
+      "rules": [
+        "Resolve backend/frontend contract mismatches",
+        "Keep OpenAPI-driven workflow intact",
+        "Run affected checks before release"
+      ]
+    }
+  ]
+}
+
