@@ -1,21 +1,22 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-13T13:51:46+08:00",
+  "updatedAt": "2026-07-13T14:14:25+08:00",
   "tasks": [
     {
       "id": "VEIC-001",
       "title": "Split soft App.tsx into components and hooks",
       "area": "soft",
-      "status": "todo",
-      "owner": "",
+      "status": "done",
+      "owner": "frontend-agent",
       "branch": "",
-      "updatedAt": "2026-07-13T00:00:00+08:00",
+      "updatedAt": "2026-07-13T14:03:47+08:00",
       "checks": [
         "npm run check",
         "npm run build"
       ],
       "notes": [
-        "Keep behavior unchanged. Start with shell, workspace, timeline, resource explorer, runtime log."
+        "Keep behavior unchanged. Start with shell, workspace, timeline, resource explorer, runtime log.",
+        "2026-07-13T14:03:47+08:00 P0.1 split App.tsx into focused components/hooks; npm run check and npm run build passed."
       ]
     },
     {
@@ -91,6 +92,20 @@
       "notes": [
         "2026-07-13T13:51:41+08:00 server commit 672ee0b; contract suite passed 51 tests",
         "2026-07-13T13:51:46+08:00 Capability publish/heartbeat replace-all risk fixed"
+      ]
+    },
+    {
+      "id": "VEIC-007",
+      "title": "Archive workspace events by retention policy",
+      "area": "server",
+      "status": "done",
+      "owner": "backend-agent",
+      "branch": "master",
+      "updatedAt": "2026-07-13T14:14:25+08:00",
+      "checks": [],
+      "notes": [
+        "2026-07-13T14:14:18+08:00 server commit c4f8a01; contract suite passed 52 tests",
+        "2026-07-13T14:14:25+08:00 Workspace event retention/archive controller implemented"
       ]
     }
   ]
