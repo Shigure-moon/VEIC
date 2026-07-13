@@ -15,6 +15,7 @@ import { WorkspaceList } from "./components/workspace/WorkspaceList";
 import { useAuth } from "./hooks/useAuth";
 import { useHealth } from "./hooks/useHealth";
 import { useRuntimeLog } from "./hooks/useRuntimeLog";
+import { useRuntimeRecords } from "./hooks/useRuntimeRecords";
 import { useRuntimeProbe } from "./hooks/useRuntimeProbe";
 import { useResourceDetail } from "./hooks/useResourceDetail";
 import { useTaskRunner } from "./hooks/useTaskRunner";
@@ -58,6 +59,12 @@ export default function App() {
     refreshWorkspaceState: workspaces.refreshWorkspaceState,
   });
   const resourceDetail = useResourceDetail({
+    api,
+    workspaceId: workspaces.selectedWorkspaceId,
+    resourceId: workspaces.selectedResourceId,
+    enabled: auth.isLoggedIn,
+  });
+  const runtimeRecords = useRuntimeRecords({
     api,
     workspaceId: workspaces.selectedWorkspaceId,
     resourceId: workspaces.selectedResourceId,
@@ -399,6 +406,7 @@ export default function App() {
         resources={resources}
         sessions={sessions}
         timelineEvents={timelineEvents}
+        runtimeRecords={runtimeRecords.records}
         logs={logs}
         resourceDetail={resourceDetail}
         selectedResourceId={selectedResourceId}

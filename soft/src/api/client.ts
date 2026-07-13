@@ -6,6 +6,7 @@ export type JsonObject = Record<string, unknown>;
 export type WorkspaceEvent = Schema<"WorkspaceEvent">;
 export type WorkspaceSync = Schema<"WorkspaceSync">;
 export type CapabilityInvocation = Schema<"CapabilityInvocation">;
+export type RuntimeRecordKind = "all" | "generic" | "mcp";
 
 export type ApiBaseConfig = {
   baseUrl: string;
@@ -164,6 +165,22 @@ export class VeicApiClient {
     return this.send(this.client.GET("/api/v2/workspaces/{workspaceId}/invocations", {
       headers: this.headers(),
       params: { path: { workspaceId }, query: resourceId ? { resourceId } : undefined },
+    }));
+  }
+
+  listRuntimeRecords(
+    workspaceId: string,
+    query: {
+      limit?: number;
+      resourceId?: string;
+      traceId?: string;
+      recordKind?: RuntimeRecordKind;
+      includeExecutionEvents?: boolean;
+    } = {},
+  ) {
+    return this.send(this.client.GET("/api/v2/workspaces/{workspaceId}/runtime-records", {
+      headers: this.headers(),
+      params: { path: { workspaceId }, query },
     }));
   }
 

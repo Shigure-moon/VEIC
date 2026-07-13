@@ -75,6 +75,7 @@
 
 - Timeline events；
 - Workspace state；
+- Runtime records；
 - Runtime logs；
 - Resource/capability text。
 

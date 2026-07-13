@@ -65,6 +65,13 @@ Updated: 2026-07-13
 - Timeline 清空；
 - Runtime Log。
 
+### Runtime Records
+
+- `GET /runtime-records` 只读拉取；
+- 当前 Workspace / 当前 Resource 过滤；
+- 可附带 execution events；
+- 用于 Workspace Search 溯源，不执行任何 capability。
+
 ### Workspace Search
 
 - 本地只读搜索入口；
@@ -73,6 +80,7 @@ Updated: 2026-07-13
   - Members；
   - Resources / Endpoints / Capabilities；
   - 当前选中 Resource 的 Twin / Drift / Invocations / Execution Events；
+  - Runtime Records / Runtime Record execution events；
   - Timeline events；
   - Runtime logs；
 - 不调用 LLM；

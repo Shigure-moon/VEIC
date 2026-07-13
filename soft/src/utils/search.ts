@@ -2,6 +2,7 @@ import type { CachedWorkspaceEvent, RuntimeLog } from "../tauri";
 import type {
   Resource,
   ResourceDetailHydration,
+  RuntimeRecord,
   Session,
   Workspace,
   WorkspaceMember,
@@ -16,6 +17,7 @@ export type WorkspaceSearchSource =
   | "member"
   | "session"
   | "timeline"
+  | "runtime_record"
   | "runtime_log"
   | "twin"
   | "invocation";
@@ -39,6 +41,7 @@ type SearchInput = {
   resources: Resource[];
   sessions: Session[];
   timelineEvents: CachedWorkspaceEvent[];
+  runtimeRecords: RuntimeRecord[];
   logs: RuntimeLog[];
   resourceDetail: ResourceDetailHydration;
   selectedResourceId: string;
@@ -58,6 +61,7 @@ const SOURCE_LABEL: Record<WorkspaceSearchSource, string> = {
   member: "Member",
   session: "Session",
   timeline: "Timeline",
+  runtime_record: "Runtime Record",
   runtime_log: "Runtime Log",
   twin: "Twin",
   invocation: "Invocation",
@@ -71,6 +75,7 @@ const SOURCE_RANK: Record<WorkspaceSearchSource, number> = {
   twin: 78,
   invocation: 74,
   timeline: 70,
+  runtime_record: 76,
   member: 62,
   session: 58,
   runtime_log: 48,
@@ -230,6 +235,38 @@ function buildCandidates(input: SearchInput): Candidate[] {
         event.revision,
         summary,
         event.payload,
+      ],
+    });
+  }
+
+  for (const record of input.runtimeRecords.slice(0, 120)) {
+    const recordId = record.recordId || record.traceId || record.capabilityKey || "";
+    push(candidates, {
+      source: "runtime_record",
+      id: `runtime-record:${recordId}:${record.startedAt || ""}`,
+      title: record.capabilityKey || record.toolName || "runtime record",
+      detail: `${value(record.recordKind)} / ${value(record.status)} / ${value(record.provider)} / ${value(record.protocol)} / ${compactJson(record.error || record.response || record.request)}`,
+      meta: record.traceId ? `trace ${shortId(record.traceId)}` : `${record.executionEvents?.length ?? 0} execution events`,
+      time: record.startedAt || record.finishedAt || undefined,
+      resourceId: record.resourceId || undefined,
+      searchable: [
+        record.recordKind,
+        record.recordId,
+        record.resourceId,
+        record.capabilityId,
+        record.capabilityKey,
+        record.provider,
+        record.protocol,
+        record.toolName,
+        record.status,
+        record.request,
+        record.response,
+        record.error,
+        record.runtimeMetadata,
+        record.traceId,
+        record.spanId,
+        record.correlationId,
+        record.executionEvents,
       ],
     });
   }

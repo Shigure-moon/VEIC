@@ -3,6 +3,7 @@ import type { CachedWorkspaceEvent, RuntimeLog } from "../../tauri";
 import type {
   Resource,
   ResourceDetailHydration,
+  RuntimeRecord,
   Session,
   Workspace,
   WorkspaceMember,
@@ -20,6 +21,7 @@ export function WorkspaceSearch({
   resources,
   sessions,
   timelineEvents,
+  runtimeRecords,
   logs,
   resourceDetail,
   selectedResourceId,
@@ -31,6 +33,7 @@ export function WorkspaceSearch({
   resources: Resource[];
   sessions: Session[];
   timelineEvents: CachedWorkspaceEvent[];
+  runtimeRecords: RuntimeRecord[];
   logs: RuntimeLog[];
   resourceDetail: ResourceDetailHydration;
   selectedResourceId: string;
@@ -64,6 +67,7 @@ export function WorkspaceSearch({
     resources,
     sessions,
     timelineEvents,
+    runtimeRecords,
     logs,
     resourceDetail,
     selectedResourceId,
@@ -74,6 +78,7 @@ export function WorkspaceSearch({
     query,
     resourceDetail,
     resources,
+    runtimeRecords,
     selectedResourceId,
     selectedWorkspace,
     sessions,

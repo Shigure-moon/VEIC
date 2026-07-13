@@ -154,3 +154,33 @@ Acceptance:
 
 Notes:
   - If Agent Runtime trajectory export/evaluation becomes user-facing, request a dedicated OpenAPI endpoint and update `src/api/client.ts` only after the contract lands.
+
+## 2026-07-13 - Runtime Records read API
+
+Owner:
+  backend-agent / frontend-agent sync.
+
+OpenAPI:
+  `server` commit `35b737b` (`VEIC-013 server: add unified runtime records API`).
+
+Changed endpoints:
+  - `GET /api/v2/workspaces/{workspaceId}/runtime-records`
+
+Frontend impact:
+  - Generated `src/api/schema.ts` from the new OpenAPI.
+  - Added `VeicApiClient.listRuntimeRecords`.
+  - Added read-only runtime record hydration for the selected Workspace / selected Resource.
+  - Workspace Search now indexes runtime records with trace/status/provider/protocol metadata.
+
+Migration:
+  - `npm run generate:api`
+  - Update `src/api/client.ts`
+  - Update Workspace Search source indexing.
+
+Acceptance:
+  - `npm run check`
+  - `npm run build`
+
+Notes:
+  - This is read-only in `soft`.
+  - Command Palette still only writes local command intent logs and does not execute invocations.

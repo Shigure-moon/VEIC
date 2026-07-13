@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-13T17:40:42+08:00",
+  "updatedAt": "2026-07-13T17:52:36+08:00",
   "tasks": [
     {
       "id": "VEIC-001",
@@ -202,6 +202,24 @@
         "2026-07-13T16:59:17+08:00 P1.2: Ctrl+K resource/capability command surface with local command intent logging only; no capability invocation execution.",
         "2026-07-13T16:59:24+08:00 Implementing Command Palette skeleton in soft.",
         "2026-07-13T17:40:42+08:00 Command Palette skeleton implemented: Ctrl+K opens resource/capability index, selecting opens local resource detail and records a local command intent log only; .\\\\node_modules\\\\.bin\\\\tsc.cmd --noEmit and .\\\\node_modules\\\\.bin\\\\vite.cmd build passed."
+      ]
+    },
+    {
+      "id": "VEIC-014",
+      "title": "Sync runtime records OpenAPI and soft read path",
+      "area": "contract",
+      "status": "done",
+      "owner": "frontend-agent",
+      "branch": "",
+      "updatedAt": "2026-07-13T17:52:36+08:00",
+      "checks": [
+        "npm run check",
+        "npm run build"
+      ],
+      "notes": [
+        "2026-07-13T17:46:40+08:00 Server commit 35b737b added GET /runtime-records; sync generated schema and add read-only soft client/search path.",
+        "2026-07-13T17:46:56+08:00 Syncing server runtime records OpenAPI and adding read-only soft integration.",
+        "2026-07-13T17:52:36+08:00 Synced server commit 35b737b runtime records OpenAPI; generated schema, added listRuntimeRecords client wrapper, hydrated read-only runtime records, and indexed them in Workspace Search. npm run check and npm run build passed."
       ]
     }
   ]
