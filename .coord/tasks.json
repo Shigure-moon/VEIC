@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-14T11:13:01+08:00",
+  "updatedAt": "2026-07-14T11:22:49+08:00",
   "tasks": [
     {
       "id": "VEIC-001",
@@ -258,6 +258,23 @@
         "2026-07-14T11:09:46+08:00 Build a standalone read-only Resource Twin detail surface for selected resources, backed by existing twin/drift hydration APIs.",
         "2026-07-14T11:09:59+08:00 Implementing Resource Twin standalone read-only panel and smoke coverage.",
         "2026-07-14T11:13:01+08:00 Implemented standalone read-only Resource Twin panel for selected resources with desired/reported/observed partitions, drift timeline, hydrate state, and component smoke coverage. npm run test:run, npm run build, and npm run ci passed."
+      ]
+    },
+    {
+      "id": "VEIC-017",
+      "title": "Add command palette provider policy precheck",
+      "area": "soft",
+      "status": "done",
+      "owner": "frontend-agent",
+      "branch": "",
+      "updatedAt": "2026-07-14T11:22:49+08:00",
+      "checks": [
+        "npm run test:run",
+        "npm run build",
+        "npm run ci"
+      ],
+      "notes": [
+        "2026-07-14T11:22:49+08:00 Added read-only provider policy hydration from GET /workspaces/{workspaceId}/policies/providers and Command Palette precheck labels for disabled providers, role/risk blocks, required sessions, and high-risk review. Capability commands still only record local intents; no invocation execution."
       ]
     }
   ]

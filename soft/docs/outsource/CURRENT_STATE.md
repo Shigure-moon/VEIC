@@ -1,6 +1,6 @@
 # 当前实现状态
 
-Updated: 2026-07-13
+Updated: 2026-07-14
 
 ## 已实现
 
@@ -104,6 +104,9 @@ Updated: 2026-07-13
 - 本地索引 Capability；
 - 支持打开 Resource detail；
 - Capability 结果只写入本地 command intent log；
+- 拉取 `GET /workspaces/{workspaceId}/policies/providers` 做只读 provider policy 预检；
+- 预检展示 Provider disabled / Role blocked / Risk blocked / Needs session / Policy OK；
+- 预检会结合当前用户 Workspace role 和 active session 状态；
 - 不执行 invocation；
 - 不绕过后端 provider policy。
 
@@ -122,6 +125,7 @@ Updated: 2026-07-13
 - Workspace 创建/加入/审批 UI；
 - Resource invite/onboarding UI；
 - Capability invocation UI；
+- 后端 command intent 持久化入口；
 - MCP server/tool UI；
 - Simulation；
 - Agent Goals/Tasks/Notices；
@@ -139,6 +143,6 @@ Updated: 2026-07-13
 
 ## 下一阶段建议任务
 
-1. 为 Command Palette 接入后端 command intent / provider policy 只读预检接口。
-2. 补 Capability invocation 只读详情入口。
+1. 补 Capability invocation 只读详情入口。
+2. 等 server 暴露 command intent API 后，把 Command Palette 本地 intent log 升级为后端 intent 记录。
 3. M9 阶段补 Playwright/Cypress E2E smoke。

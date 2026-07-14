@@ -94,7 +94,7 @@
 
 ### P1.2 Command Palette 骨架
 
-状态：已完成第一版，等待真实 Workspace capability 数据验收。
+状态：已完成本地 intent 第一版与 provider policy 只读预检，等待真实 Workspace capability/policy 数据验收。
 
 目标：建立 `Ctrl+K` 操作入口。
 
@@ -104,11 +104,18 @@
 - 搜索 Capability；
 - 打开 Resource detail；
 - 写入本地 command log。
+- 拉取 provider policy；
+- 展示 disabled provider、role block、risk block、requires session、policy ok 等预检状态。
 
 禁止：
 
 - 直接执行高风险 invocation；
 - 绕过后端 policy。
+
+后续：
+
+- server 暴露 command intent API 后，把本地 command log 升级为后端 intent 记录；
+- 高风险 capability 进入 Simulation，而不是直接执行。
 
 ### P1.3 UI smoke test
 

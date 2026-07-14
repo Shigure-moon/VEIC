@@ -12,8 +12,10 @@ export type ResourceTwinDrift = Schema<"ResourceTwinDrift">;
 export type CapabilityInvocation = Schema<"CapabilityInvocation">;
 export type InvocationExecutionEvent = Schema<"InvocationExecutionEvent">;
 export type RuntimeRecord = Schema<"RuntimeRecord">;
+export type CapabilityProviderPolicy = Schema<"CapabilityProviderPolicy">;
 export type WorkspaceMember = NonNullable<WorkspaceDetail["members"]>[number];
 export type Session = NonNullable<WorkspaceStateSnapshot["sessions"]>[number];
+export type WorkspaceRole = NonNullable<WorkspaceMember["role"]>;
 
 export type HealthState = {
   service: "unknown" | "ok" | "error";
@@ -43,6 +45,13 @@ export type RuntimeRecordsHydration = {
   error: string;
   loadedAt: string;
   records: RuntimeRecord[];
+};
+
+export type ProviderPoliciesHydration = {
+  status: HydrationStatus;
+  error: string;
+  loadedAt: string;
+  policies: CapabilityProviderPolicy[];
 };
 
 export const DEFAULT_API_BASE = "https://api.veic.tech";

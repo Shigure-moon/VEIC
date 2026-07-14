@@ -1,7 +1,31 @@
-import type { Capability, Resource, ResourceDetailHydration } from "../types";
+import type {
+  Capability,
+  CapabilityProviderPolicy,
+  HydrationStatus,
+  Resource,
+  ResourceDetailHydration,
+  WorkspaceRole,
+} from "../types";
 import { shortId } from "./format";
 
 export type CommandPaletteItemKind = "open_resource" | "capability_intent";
+export type CommandPolicyStatus =
+  | "allowed"
+  | "loading"
+  | "unknown"
+  | "provider_disabled"
+  | "capability_unavailable"
+  | "role_blocked"
+  | "risk_blocked"
+  | "needs_session";
+export type CommandPolicyTone = "ok" | "warn" | "block" | "neutral";
+
+export type CommandPolicyPreview = {
+  status: CommandPolicyStatus;
+  tone: CommandPolicyTone;
+  label: string;
+  detail: string;
+};
 
 export type CommandPaletteItem = {
   id: string;
@@ -13,6 +37,7 @@ export type CommandPaletteItem = {
   resourceName: string;
   capabilityKey?: string;
   riskLevel?: string | null;
+  policy?: CommandPolicyPreview;
   score: number;
 };
 
@@ -21,6 +46,11 @@ type CommandPaletteInput = {
   resources: Resource[];
   resourceDetail?: ResourceDetailHydration;
   selectedResourceId?: string;
+  providerPolicies?: CapabilityProviderPolicy[];
+  providerPoliciesStatus?: HydrationStatus;
+  providerPoliciesError?: string;
+  currentUserRole?: WorkspaceRole;
+  hasActiveSession?: boolean;
   limit?: number;
 };
 
@@ -31,7 +61,7 @@ type Candidate = Omit<CommandPaletteItem, "score"> & {
 
 export function buildCommandPaletteItems(input: CommandPaletteInput): CommandPaletteItem[] {
   const terms = normalizeTerms(input.query);
-  const candidates = buildCandidates(input.resources, input.resourceDetail, input.selectedResourceId);
+  const candidates = buildCandidates(input.resources, input.resourceDetail, input.selectedResourceId, input);
 
   return candidates
     .map((candidate) => scoreCandidate(candidate, terms))
@@ -44,6 +74,10 @@ function buildCandidates(
   resources: Resource[],
   resourceDetail: ResourceDetailHydration | undefined,
   selectedResourceId: string | undefined,
+  input?: Pick<
+    CommandPaletteInput,
+    "providerPolicies" | "providerPoliciesStatus" | "providerPoliciesError" | "currentUserRole" | "hasActiveSession"
+  >,
 ): Candidate[] {
   const candidates: Candidate[] = [];
 
@@ -81,6 +115,15 @@ function buildCandidates(
     for (const capability of capabilities) {
       const capabilityKey = capability.capabilityKey || "capability";
       const riskLevel = capability.riskLevel || "";
+      const policy = evaluateCapabilityPolicy({
+        capability,
+        policies: input?.providerPolicies,
+        policiesStatus: input?.providerPoliciesStatus,
+        policiesError: input?.providerPoliciesError,
+        currentUserRole: input?.currentUserRole,
+        hasActiveSession: input?.hasActiveSession,
+      });
+      const policyRankOffset = policy.tone === "block" ? -24 : policy.tone === "warn" ? -8 : 0;
       candidates.push({
         id: `capability:${resourceId}:${capability.id || capabilityKey}`,
         kind: "capability_intent",
@@ -93,17 +136,19 @@ function buildCandidates(
         ]
           .filter(Boolean)
           .join(" / ") || "capability",
-        meta: riskLevel ? `LOCAL INTENT / RISK ${riskLevel}` : "LOCAL INTENT",
+        meta: riskLevel ? `${policy.label} / RISK ${riskLevel}` : policy.label,
         resourceId,
         resourceName,
         capabilityKey,
         riskLevel,
+        policy,
         searchable: [
           "run",
           "execute",
           "invoke",
           "intent",
           "capability",
+          "policy",
           "restart",
           resource.name,
           resource.resourceType,
@@ -115,8 +160,10 @@ function buildCandidates(
           capability.riskLevel,
           capability.status,
           capability.metadata,
+          policy.label,
+          policy.detail,
         ],
-        rank: riskLevel.toLowerCase() === "high" ? 76 : 84,
+        rank: (riskLevel.toLowerCase() === "high" ? 76 : 84) + policyRankOffset,
       });
     }
   }
@@ -187,4 +234,148 @@ function searchText(value: unknown): string {
 
 function text(value: unknown) {
   return searchText(value).trim();
+}
+
+function evaluateCapabilityPolicy({
+  capability,
+  policies,
+  policiesStatus,
+  policiesError,
+  currentUserRole,
+  hasActiveSession,
+}: {
+  capability: Capability;
+  policies?: CapabilityProviderPolicy[];
+  policiesStatus?: HydrationStatus;
+  policiesError?: string;
+  currentUserRole?: WorkspaceRole;
+  hasActiveSession?: boolean;
+}): CommandPolicyPreview {
+  if (capability.status === "disabled" || capability.status === "unavailable") {
+    return {
+      status: "capability_unavailable",
+      tone: "block",
+      label: "CAPABILITY UNAVAILABLE",
+      detail: `capability status ${capability.status}; no invocation from palette`,
+    };
+  }
+
+  const provider = capability.provider;
+  if (!provider) {
+    return {
+      status: "unknown",
+      tone: "neutral",
+      label: "POLICY UNKNOWN",
+      detail: "capability has no provider; no invocation from palette",
+    };
+  }
+
+  if (!policiesStatus || policiesStatus === "idle" || policiesStatus === "loading") {
+    return {
+      status: "loading",
+      tone: "neutral",
+      label: "POLICY LOADING",
+      detail: `provider ${provider}; waiting for provider policies`,
+    };
+  }
+
+  if (policiesStatus === "error") {
+    return {
+      status: "unknown",
+      tone: "warn",
+      label: "POLICY ERROR",
+      detail: policiesError || `provider ${provider}; policy precheck failed`,
+    };
+  }
+
+  const policy = (policies ?? []).find((candidate) => candidate.provider === provider);
+  if (!policy) {
+    return {
+      status: "unknown",
+      tone: "warn",
+      label: "POLICY UNKNOWN",
+      detail: `provider ${provider}; backend returned no matching policy`,
+    };
+  }
+
+  if (policy.status === "disabled") {
+    return {
+      status: "provider_disabled",
+      tone: "block",
+      label: "PROVIDER DISABLED",
+      detail: `${policySummary(policy)}; provider disabled`,
+    };
+  }
+
+  const allowedRoles = policy.allowedRoles ?? ["owner", "admin", "member"];
+  if (allowedRoles.length > 0 && currentUserRole && !allowedRoles.includes(currentUserRole)) {
+    return {
+      status: "role_blocked",
+      tone: "block",
+      label: "ROLE BLOCKED",
+      detail: `${policySummary(policy)}; current role ${currentUserRole}`,
+    };
+  }
+
+  if (allowedRoles.length > 0 && !currentUserRole) {
+    return {
+      status: "unknown",
+      tone: "warn",
+      label: "ROLE UNKNOWN",
+      detail: `${policySummary(policy)}; current member role unavailable`,
+    };
+  }
+
+  const riskLevel = capability.riskLevel ?? "low";
+  const maxRiskLevel = policy.maxRiskLevel ?? "critical";
+  if (riskRank(riskLevel) > riskRank(maxRiskLevel)) {
+    return {
+      status: "risk_blocked",
+      tone: "block",
+      label: "RISK BLOCKED",
+      detail: `${policySummary(policy)}; capability risk ${riskLevel}`,
+    };
+  }
+
+  if (policy.requireSession && !hasActiveSession) {
+    return {
+      status: "needs_session",
+      tone: "warn",
+      label: "NEEDS SESSION",
+      detail: `${policySummary(policy)}; open a session before invocation`,
+    };
+  }
+
+  const highRisk = riskRank(riskLevel) >= riskRank("high");
+  return {
+    status: "allowed",
+    tone: highRisk ? "warn" : "ok",
+    label: highRisk ? "POLICY OK / REVIEW" : "POLICY OK",
+    detail: `${policySummary(policy)}; no invocation from palette`,
+  };
+}
+
+function policySummary(policy: CapabilityProviderPolicy) {
+  return [
+    `provider ${policy.provider || "unknown"}`,
+    `source ${policy.source || "unknown"}`,
+    `roles ${(policy.allowedRoles ?? ["owner", "admin", "member"]).join(",") || "none"}`,
+    `max ${policy.maxRiskLevel || "critical"}`,
+    policy.requireSession ? "session required" : "no session required",
+  ].join(" / ");
+}
+
+function riskRank(value: string) {
+  switch (value.toLowerCase()) {
+    case "critical":
+      return 4;
+    case "high":
+      return 3;
+    case "medium":
+      return 2;
+    case "low":
+      return 1;
+    default:
+      return 1;
+  }
 }

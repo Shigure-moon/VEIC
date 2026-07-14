@@ -68,7 +68,7 @@ For the desktop app, prefer operational density over a landing-page composition.
 
 ## Current Implementation Snapshot
 
-Updated: 2026-07-13
+Updated: 2026-07-14
 
 | Area | Status |
 | --- | --- |
@@ -84,15 +84,16 @@ Updated: 2026-07-13
 | Resource Explorer | Implemented first pass from Workspace state snapshot |
 | Resource Twin Detail | Implemented read-only standalone panel |
 | Workspace Search | Implemented first local read-only pass |
-| Command Palette | Implemented first local intent pass |
+| Command Palette | Implemented first local intent pass with provider policy precheck |
+| Provider Policy Precheck | Implemented read-only Command Palette route guard |
 | Runtime Records | Implemented read-only Workspace Search source |
 | UI smoke tests | Implemented Vitest first pass |
 | C4 documentation | SVG diagrams are the primary rendered diagrams |
 
 Progress estimate:
 
-- Current `soft` desktop MVP: about 57%.
-- Full P3 Agent Runtime desktop vision: about 32%.
+- Current `soft` desktop MVP: about 60%.
+- Full P3 Agent Runtime desktop vision: about 34%.
 
 ## Milestones
 
@@ -251,6 +252,7 @@ Scope:
 
 - `Ctrl+K` global command palette;
 - command index from resources and capabilities;
+- provider policy read-only precheck;
 - target disambiguation:
   - Restart Robot A;
   - Restart Robot B;

@@ -75,6 +75,28 @@ describe("VeicApiClient smoke", () => {
     });
   });
 
+  it("loads capability provider policies for command precheck", async () => {
+    const policies = [
+      {
+        provider: "mcp",
+        status: "enabled",
+        allowedRoles: ["owner", "admin"],
+        maxRiskLevel: "medium",
+        requireSession: true,
+        source: "stored",
+      },
+    ];
+    getMock.mockReturnValueOnce(ok(policies));
+
+    const api = createVeicApiClient({ baseUrl: "https://api.veic.tech", token: "token-1" });
+    await expect(api.listCapabilityProviderPolicies("workspace-1")).resolves.toEqual(policies);
+
+    expect(getMock).toHaveBeenCalledWith("/api/v2/workspaces/{workspaceId}/policies/providers", {
+      headers: { Authorization: "Bearer token-1" },
+      params: { path: { workspaceId: "workspace-1" } },
+    });
+  });
+
   it("writes the registration token after POST /auth/register returns 201", async () => {
     const authResponse = {
       token: "registered-token",

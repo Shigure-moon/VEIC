@@ -18,6 +18,7 @@ import { useRuntimeLog } from "./hooks/useRuntimeLog";
 import { useRuntimeRecords } from "./hooks/useRuntimeRecords";
 import { useRuntimeProbe } from "./hooks/useRuntimeProbe";
 import { useResourceDetail } from "./hooks/useResourceDetail";
+import { useProviderPolicies } from "./hooks/useProviderPolicies";
 import { useTaskRunner } from "./hooks/useTaskRunner";
 import { useTimeline } from "./hooks/useTimeline";
 import { useWorkspaces } from "./hooks/useWorkspaces";
@@ -68,6 +69,11 @@ export default function App() {
     api,
     workspaceId: workspaces.selectedWorkspaceId,
     resourceId: workspaces.selectedResourceId,
+    enabled: auth.isLoggedIn,
+  });
+  const providerPolicies = useProviderPolicies({
+    api,
+    workspaceId: workspaces.selectedWorkspaceId,
     enabled: auth.isLoggedIn,
   });
 
@@ -315,6 +321,14 @@ export default function App() {
   }, [clearTimeline, runTask, selectedWorkspaceId]);
 
   const backendChanged = normalizeApiBaseUrl(apiBaseUrl) !== savedApiBaseUrl;
+  const currentUserRole = useMemo(() => {
+    if (!user?.id) return undefined;
+    return members.find((member) => member.userId === user.id)?.role;
+  }, [members, user?.id]);
+  const hasActiveSession = useMemo(() => sessions.some((detail) => {
+    const status = detail.session?.status?.toLowerCase();
+    return status === "active" || status === "open" || status === "connected" || (detail.connections?.length ?? 0) > 0;
+  }), [sessions]);
 
   return (
     <div className="runtime-app">
@@ -418,6 +432,9 @@ export default function App() {
         resources={resources}
         resourceDetail={resourceDetail}
         selectedResourceId={selectedResourceId}
+        providerPolicies={providerPolicies}
+        currentUserRole={currentUserRole}
+        hasActiveSession={hasActiveSession}
         onSelectResource={setSelectedResourceId}
         onRecordCommandIntent={(message) => recordLog("info", message)}
       />

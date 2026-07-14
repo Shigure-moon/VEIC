@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, type KeyboardEvent as ReactKeyboardEvent } from "react";
-import type { Resource, ResourceDetailHydration } from "../../types";
+import type { ProviderPoliciesHydration, Resource, ResourceDetailHydration, WorkspaceRole } from "../../types";
 import {
   buildCommandPaletteItems,
   type CommandPaletteItem,
@@ -10,6 +10,9 @@ export function CommandPalette({
   resources,
   resourceDetail,
   selectedResourceId,
+  providerPolicies,
+  currentUserRole,
+  hasActiveSession,
   onSelectResource,
   onRecordCommandIntent,
 }: {
@@ -17,6 +20,9 @@ export function CommandPalette({
   resources: Resource[];
   resourceDetail: ResourceDetailHydration;
   selectedResourceId: string;
+  providerPolicies: ProviderPoliciesHydration;
+  currentUserRole?: WorkspaceRole;
+  hasActiveSession: boolean;
   onSelectResource: (resourceId: string) => void;
   onRecordCommandIntent: (message: string) => Promise<void>;
 }) {
@@ -30,8 +36,23 @@ export function CommandPalette({
     resources,
     resourceDetail,
     selectedResourceId,
+    providerPolicies: providerPolicies.policies,
+    providerPoliciesStatus: providerPolicies.status,
+    providerPoliciesError: providerPolicies.error,
+    currentUserRole,
+    hasActiveSession,
     limit: 14,
-  }), [query, resourceDetail, resources, selectedResourceId]);
+  }), [
+    currentUserRole,
+    hasActiveSession,
+    providerPolicies.error,
+    providerPolicies.policies,
+    providerPolicies.status,
+    query,
+    resourceDetail,
+    resources,
+    selectedResourceId,
+  ]);
 
   useEffect(() => {
     if (activeIndex >= items.length) {
@@ -141,6 +162,9 @@ export function CommandPalette({
                 <span>{item.meta}</span>
                 <strong>{item.title}</strong>
                 <em>{item.detail}</em>
+                {item.policy ? (
+                  <small className={`command-policy ${item.policy.tone}`}>{item.policy.detail}</small>
+                ) : null}
               </button>
             ))
           )}

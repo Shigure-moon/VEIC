@@ -151,6 +151,13 @@ export class VeicApiClient {
     }));
   }
 
+  listCapabilityProviderPolicies(workspaceId: string) {
+    return this.send(this.client.GET("/api/v2/workspaces/{workspaceId}/policies/providers", {
+      headers: this.headers(),
+      params: { path: { workspaceId } },
+    }));
+  }
+
   syncWorkspace(workspaceId: string, afterRevision = 0) {
     return this.send(this.client.GET("/api/v2/workspaces/{workspaceId}/sync", {
       headers: this.headers(),
