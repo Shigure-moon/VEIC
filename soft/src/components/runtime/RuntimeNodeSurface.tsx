@@ -1,5 +1,6 @@
 import { EmptyState, Metric, SectionHeading } from "../common";
 import { ResourceExplorer } from "../resources/ResourceExplorer";
+import { ResourceTwinPanel } from "../resources/ResourceTwinPanel";
 import { RuntimeNodePanel } from "./RuntimeNodePanel";
 import type {
   Resource,
@@ -58,6 +59,7 @@ export function RuntimeNodeSurface({
   const agentCount =
     members.filter((member) => /agent/i.test(member.memberType || "")).length +
     resources.filter((resource) => /agent/i.test(resource.resourceType || "")).length;
+  const selectedResource = resources.find((resource) => resource.id === selectedResourceId) ?? resources[0];
 
   return (
     <section className="panel runtime-panel">
@@ -79,6 +81,11 @@ export function RuntimeNodeSurface({
             resources={resources}
             selectedResourceId={selectedResourceId}
             onSelect={setSelectedResourceId}
+            detail={resourceDetail}
+          />
+
+          <ResourceTwinPanel
+            resource={selectedResource}
             detail={resourceDetail}
           />
 

@@ -126,6 +126,26 @@
 - 401 启动恢复触发 logout state；
 - register 201 后 token 写入。
 
+### P1.4 Resource Twin 独立详情页
+
+状态：已完成第一版。
+
+目标：让 Resource Twin 从 Resource Explorer 摘要里独立出来。
+
+第一版只做：
+
+- 展示 desired / reported / observed 分区；
+- 展示 Drift Timeline；
+- 展示 hydrate 状态和 API error；
+- 使用真实 Resource Twin API hydrate 数据；
+- 增加组件 smoke。
+
+禁止：
+
+- 更新 desired state；
+- 解决 drift；
+- 触发 capability invocation。
+
 ## P2 - Runtime Integration
 
 ### P2.1 Runtime installer/repair 页面

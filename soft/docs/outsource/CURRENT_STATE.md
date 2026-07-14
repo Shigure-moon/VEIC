@@ -56,6 +56,15 @@ Updated: 2026-07-13
   - `GET /invocations?resourceId=`；
   - `GET /invocations/{capabilityInvocationId}/execution-events`。
 
+### Resource Twin Detail
+
+- 独立只读面板；
+- 展示 selected Resource 的 desired / reported / observed 三个分区；
+- 展示 active drift 数量；
+- 展示 Drift Timeline；
+- API error / loading / ready 状态可见；
+- 不执行 mutation。
+
 ### Timeline
 
 - `/events/wait` long poll；
@@ -112,7 +121,6 @@ Updated: 2026-07-13
 
 - Workspace 创建/加入/审批 UI；
 - Resource invite/onboarding UI；
-- Resource Twin 独立详情页；
 - Capability invocation UI；
 - MCP server/tool UI；
 - Simulation；
@@ -131,6 +139,6 @@ Updated: 2026-07-13
 
 ## 下一阶段建议任务
 
-1. 补 Resource Twin 独立详情页。
-2. 为 Command Palette 接入后端 command intent / provider policy 只读预检接口。
+1. 为 Command Palette 接入后端 command intent / provider policy 只读预检接口。
+2. 补 Capability invocation 只读详情入口。
 3. M9 阶段补 Playwright/Cypress E2E smoke。

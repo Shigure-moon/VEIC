@@ -82,6 +82,7 @@ Updated: 2026-07-13
 | Resource publish / heartbeat / offline | Implemented first pass |
 | Timeline live sync | Implemented with long-poll `/events/wait` plus `/sync` cursor cache |
 | Resource Explorer | Implemented first pass from Workspace state snapshot |
+| Resource Twin Detail | Implemented read-only standalone panel |
 | Workspace Search | Implemented first local read-only pass |
 | Command Palette | Implemented first local intent pass |
 | Runtime Records | Implemented read-only Workspace Search source |
@@ -90,8 +91,8 @@ Updated: 2026-07-13
 
 Progress estimate:
 
-- Current `soft` desktop MVP: about 55%.
-- Full P3 Agent Runtime desktop vision: about 31%.
+- Current `soft` desktop MVP: about 57%.
+- Full P3 Agent Runtime desktop vision: about 32%.
 
 ## Milestones
 

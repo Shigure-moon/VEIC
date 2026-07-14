@@ -567,6 +567,91 @@ select {
   gap: 8px;
 }
 
+.resource-twin-panel {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: rgba(0, 0, 0, 0.42);
+}
+
+.resource-twin-head,
+.twin-partition-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  min-width: 0;
+}
+
+.resource-twin-head h3 {
+  min-width: 0;
+  margin: 0;
+  overflow: hidden;
+  color: var(--fg);
+  font-size: 17px;
+  font-weight: 400;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.twin-partition-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--line);
+}
+
+.twin-partition {
+  display: grid;
+  grid-template-rows: auto minmax(132px, 1fr);
+  min-width: 0;
+  background: rgba(0, 0, 0, 0.74);
+}
+
+.twin-partition-title {
+  min-height: 40px;
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+}
+
+.twin-partition-title span,
+.twin-partition-title strong {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.twin-partition-title span {
+  color: var(--dim);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.twin-partition-title strong {
+  color: var(--muted);
+  font-size: 11px;
+  font-weight: 400;
+}
+
+.twin-partition pre {
+  min-width: 0;
+  max-height: 220px;
+  margin: 0;
+  padding: 10px;
+  overflow: auto;
+  color: var(--muted);
+  font: 11px/1.5 var(--font);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 .detail-row {
   display: grid;
   gap: 4px;
@@ -1091,6 +1176,10 @@ select {
   }
 
   .resource-explorer {
+    grid-template-columns: 1fr;
+  }
+
+  .twin-partition-grid {
     grid-template-columns: 1fr;
   }
 

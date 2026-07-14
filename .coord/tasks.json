@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-07-14T10:48:09+08:00",
+  "updatedAt": "2026-07-14T11:13:01+08:00",
   "tasks": [
     {
       "id": "VEIC-001",
@@ -239,6 +239,25 @@
       "notes": [
         "2026-07-14T10:47:49+08:00 Phase 1 test foundation: Vitest, Testing Library, jsdom, CI workflow, API/auth/workspace smoke coverage.",
         "2026-07-14T10:48:09+08:00 Implemented Vitest/jsdom test foundation with 7 smoke tests across API client, keychain fallback, WorkspaceList, and 401 auth bootstrap. npm run check, npm run test:run, and npm run build passed."
+      ]
+    },
+    {
+      "id": "VEIC-016",
+      "title": "Add resource twin detail panel",
+      "area": "soft",
+      "status": "done",
+      "owner": "frontend-agent",
+      "branch": "",
+      "updatedAt": "2026-07-14T11:13:01+08:00",
+      "checks": [
+        "npm run test:run",
+        "npm run build",
+        "npm run ci"
+      ],
+      "notes": [
+        "2026-07-14T11:09:46+08:00 Build a standalone read-only Resource Twin detail surface for selected resources, backed by existing twin/drift hydration APIs.",
+        "2026-07-14T11:09:59+08:00 Implementing Resource Twin standalone read-only panel and smoke coverage.",
+        "2026-07-14T11:13:01+08:00 Implemented standalone read-only Resource Twin panel for selected resources with desired/reported/observed partitions, drift timeline, hydrate state, and component smoke coverage. npm run test:run, npm run build, and npm run ci passed."
       ]
     }
   ]
