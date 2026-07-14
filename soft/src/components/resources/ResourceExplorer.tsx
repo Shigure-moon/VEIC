@@ -136,8 +136,8 @@ export function ResourceExplorer({
             />
 
             <DetailList
-              title="Latest Execution Events"
-              empty={hydrated ? "No execution events returned for the latest invocation." : "Execution events will load from the detail API."}
+              title="Recent Execution Events"
+              empty={hydrated ? "No execution events returned for recent invocations." : "Execution events will load from the detail API."}
               items={executionEvents.map((event) => ({
                 key: event.id || `${event.invocationId}-${event.sequence}`,
                 title: `#${event.sequence ?? "-"} ${event.eventType || "event"}`,

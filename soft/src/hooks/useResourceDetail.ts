@@ -46,10 +46,20 @@ export function useResourceDetail({
           api.listCapabilityInvocations(workspaceId, resourceId),
         ]);
         const sortedInvocations = [...invocations].sort((a, b) => dateValue(b.startedAt) - dateValue(a.startedAt));
-        const latestInvocationId = sortedInvocations[0]?.id || "";
-        const executionEvents = latestInvocationId
-          ? await api.listCapabilityInvocationExecutionEvents(workspaceId, latestInvocationId)
-          : [];
+        const recentInvocationIds = sortedInvocations
+          .slice(0, 3)
+          .map((invocation) => invocation.id)
+          .filter((id): id is string => Boolean(id));
+        const executionEvents = (await Promise.all(
+          recentInvocationIds.map((invocationId) =>
+            api.listCapabilityInvocationExecutionEvents(workspaceId, invocationId)
+          ),
+        ))
+          .flat()
+          .sort((a, b) => {
+            if (a.invocationId === b.invocationId) return (a.sequence ?? 0) - (b.sequence ?? 0);
+            return dateValue(b.createdAt) - dateValue(a.createdAt);
+          });
 
         if (cancelled) return;
         setDetail({

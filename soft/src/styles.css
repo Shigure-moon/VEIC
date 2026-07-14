@@ -567,7 +567,8 @@ select {
   gap: 8px;
 }
 
-.resource-twin-panel {
+.resource-twin-panel,
+.invocation-panel {
   display: grid;
   gap: 12px;
   min-width: 0;
@@ -650,6 +651,108 @@ select {
   font: 11px/1.5 var(--font);
   white-space: pre-wrap;
   overflow-wrap: anywhere;
+}
+
+.invocation-layout {
+  display: grid;
+  grid-template-columns: minmax(170px, 0.36fr) minmax(0, 1fr);
+  gap: 12px;
+  min-width: 0;
+}
+
+.invocation-list,
+.invocation-detail {
+  display: grid;
+  align-content: start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.invocation-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 4px 8px;
+  min-width: 0;
+  padding: 9px 10px;
+  border-color: var(--line);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--fg);
+  text-align: left;
+}
+
+.invocation-row.active,
+.invocation-row:hover {
+  border-color: rgba(255, 255, 255, 0.72);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.invocation-row span,
+.invocation-row strong,
+.invocation-row em {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.invocation-row span {
+  color: var(--fg);
+  font-size: 12px;
+}
+
+.invocation-row strong {
+  color: var(--muted);
+  font-size: 10px;
+  font-weight: 400;
+  text-transform: uppercase;
+}
+
+.invocation-row em {
+  grid-column: 1 / -1;
+  color: var(--dim);
+  font-size: 10px;
+  font-style: normal;
+}
+
+.invocation-json-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--line);
+}
+
+.invocation-json-block {
+  display: grid;
+  grid-template-rows: auto minmax(88px, 1fr);
+  min-width: 0;
+  background: rgba(0, 0, 0, 0.74);
+}
+
+.invocation-json-block span {
+  padding: 9px 10px;
+  border-bottom: 1px solid var(--line);
+  color: var(--dim);
+  font-size: 10px;
+  text-transform: uppercase;
+}
+
+.invocation-json-block pre {
+  min-width: 0;
+  max-height: 180px;
+  margin: 0;
+  padding: 10px;
+  overflow: auto;
+  color: var(--muted);
+  font: 11px/1.5 var(--font);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.invocation-json-block.error pre {
+  color: #ffb4aa;
 }
 
 .detail-row {
@@ -1197,7 +1300,9 @@ select {
     grid-template-columns: 1fr;
   }
 
-  .twin-partition-grid {
+  .twin-partition-grid,
+  .invocation-layout,
+  .invocation-json-grid {
     grid-template-columns: 1fr;
   }
 

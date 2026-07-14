@@ -153,6 +153,27 @@
 - 解决 drift；
 - 触发 capability invocation。
 
+### P1.5 Capability Invocation 只读详情入口
+
+状态：已完成第一版。
+
+目标：让 invocation 从 Resource Explorer 摘要里独立出来，支持追溯请求、响应和执行事件。
+
+第一版只做：
+
+- 展示 selected Resource 最近 invocation；
+- 支持切换最近 invocation；
+- 展示 request / response / error / runtime metadata；
+- 展示对应 execution events；
+- Resource detail hydrate 最近 3 条 invocation 的 execution events；
+- 增加组件 smoke。
+
+禁止：
+
+- start/complete invocation；
+- retry invocation；
+- 修改 request/response。
+
 ## P2 - Runtime Integration
 
 ### P2.1 Runtime installer/repair 页面

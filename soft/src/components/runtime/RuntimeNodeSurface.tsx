@@ -1,4 +1,5 @@
 import { EmptyState, Metric, SectionHeading } from "../common";
+import { CapabilityInvocationPanel } from "../resources/CapabilityInvocationPanel";
 import { ResourceExplorer } from "../resources/ResourceExplorer";
 import { ResourceTwinPanel } from "../resources/ResourceTwinPanel";
 import { RuntimeNodePanel } from "./RuntimeNodePanel";
@@ -85,6 +86,11 @@ export function RuntimeNodeSurface({
           />
 
           <ResourceTwinPanel
+            resource={selectedResource}
+            detail={resourceDetail}
+          />
+
+          <CapabilityInvocationPanel
             resource={selectedResource}
             detail={resourceDetail}
           />

@@ -83,6 +83,7 @@ Updated: 2026-07-14
 | Timeline live sync | Implemented with long-poll `/events/wait` plus `/sync` cursor cache |
 | Resource Explorer | Implemented first pass from Workspace state snapshot |
 | Resource Twin Detail | Implemented read-only standalone panel |
+| Capability Invocation Detail | Implemented read-only standalone panel |
 | Workspace Search | Implemented first local read-only pass |
 | Command Palette | Implemented first local intent pass with provider policy precheck |
 | Provider Policy Precheck | Implemented read-only Command Palette route guard |
@@ -92,8 +93,8 @@ Updated: 2026-07-14
 
 Progress estimate:
 
-- Current `soft` desktop MVP: about 60%.
-- Full P3 Agent Runtime desktop vision: about 34%.
+- Current `soft` desktop MVP: about 62%.
+- Full P3 Agent Runtime desktop vision: about 35%.
 
 ## Milestones
 

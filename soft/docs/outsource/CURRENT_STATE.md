@@ -65,6 +65,17 @@ Updated: 2026-07-14
 - API error / loading / ready 状态可见；
 - 不执行 mutation。
 
+### Capability Invocation Detail
+
+- 独立只读面板；
+- 展示 selected Resource 的最近 invocation；
+- 支持在最近 invocation 间切换；
+- 展示 request / response / error / runtime metadata；
+- 展示对应 execution events trace；
+- Resource detail hydrate 拉取最近 3 条 invocation 的 execution events；
+- 不执行 invocation；
+- 不写入 mutation。
+
 ### Timeline
 
 - `/events/wait` long poll；
@@ -124,7 +135,7 @@ Updated: 2026-07-14
 
 - Workspace 创建/加入/审批 UI；
 - Resource invite/onboarding UI；
-- Capability invocation UI；
+- Capability invocation 执行 UI；
 - 后端 command intent 持久化入口；
 - MCP server/tool UI；
 - Simulation；
@@ -143,6 +154,6 @@ Updated: 2026-07-14
 
 ## 下一阶段建议任务
 
-1. 补 Capability invocation 只读详情入口。
-2. 等 server 暴露 command intent API 后，把 Command Palette 本地 intent log 升级为后端 intent 记录。
+1. 等 server 暴露 command intent API 后，把 Command Palette 本地 intent log 升级为后端 intent 记录。
+2. 做 Simulation 只读/占位入口，明确 no real robot moved 边界。
 3. M9 阶段补 Playwright/Cypress E2E smoke。
