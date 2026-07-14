@@ -97,6 +97,10 @@ export class VeicApiClient {
     return this.send(this.client.POST("/api/v2/auth/login", { body }));
   }
 
+  register(body: { email: string; username: string; password: string }) {
+    return this.send(this.client.POST("/api/v2/auth/register", { body }));
+  }
+
   me() {
     return this.send(this.client.GET("/api/v2/auth/me", { headers: this.headers() }));
   }

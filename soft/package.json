@@ -9,7 +9,10 @@
     "build": "npm run generate:api && tsc --noEmit && vite build",
     "check": "npm run generate:api && tsc --noEmit",
     "tauri:dev": "tauri dev",
-    "tauri:build": "tauri build"
+    "tauri:build": "tauri build",
+    "test": "npm run generate:api && vitest",
+    "test:run": "npm run generate:api && vitest run",
+    "ci": "npm run check && vitest run"
   },
   "dependencies": {
     "@tauri-apps/api": "^2.11.1",
@@ -19,11 +22,15 @@
   },
   "devDependencies": {
     "@tauri-apps/cli": "^2.11.4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
     "@types/react": "^18.3.31",
     "@types/react-dom": "^18.3.7",
     "@vitejs/plugin-react": "^4.3.4",
+    "jsdom": "^29.1.1",
     "openapi-typescript": "^7.13.0",
     "typescript": "^5.9.3",
-    "vite": "^6.0.3"
+    "vite": "^6.0.3",
+    "vitest": "^4.1.10"
   }
 }

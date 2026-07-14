@@ -98,6 +98,16 @@ Updated: 2026-07-13
 - 不执行 invocation；
 - 不绕过后端 provider policy。
 
+### Smoke Tests
+
+- Vitest + Testing Library + jsdom；
+- `npm run test:run`；
+- soft CI workflow；
+- API client mock smoke；
+- keychain token fallback smoke；
+- WorkspaceList 渲染 smoke；
+- App 401 启动恢复 logout state smoke。
+
 ## 尚未实现
 
 - Workspace 创建/加入/审批 UI；
@@ -122,5 +132,5 @@ Updated: 2026-07-13
 ## 下一阶段建议任务
 
 1. 补 Resource Twin 独立详情页。
-2. 补最小 UI smoke test。
-3. 为 Command Palette 接入后端 command intent / provider policy 只读预检接口。
+2. 为 Command Palette 接入后端 command intent / provider policy 只读预检接口。
+3. M9 阶段补 Playwright/Cypress E2E smoke。

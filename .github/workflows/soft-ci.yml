@@ -1,0 +1,30 @@
+name: soft-ci
+
+on:
+  push:
+    paths:
+      - "soft/**"
+      - "server/openapi.yaml"
+      - ".github/workflows/soft-ci.yml"
+  pull_request:
+    paths:
+      - "soft/**"
+      - "server/openapi.yaml"
+      - ".github/workflows/soft-ci.yml"
+
+jobs:
+  soft:
+    runs-on: windows-latest
+    defaults:
+      run:
+        working-directory: soft
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: soft/package-lock.json
+      - run: npm ci
+      - run: npm run check
+      - run: npm run test:run

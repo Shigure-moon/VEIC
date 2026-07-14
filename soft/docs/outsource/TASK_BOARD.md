@@ -112,15 +112,19 @@
 
 ### P1.3 UI smoke test
 
+状态：已完成 Vitest 第一版，E2E 留到 M9。
+
 目标：减少回归。
 
 建议：
 
-- Playwright 或轻量 DOM smoke；
-- 登录页/未登录状态；
-- Workspace 空状态；
-- Resource Explorer 渲染；
-- Timeline 错误状态。
+- Vitest + Testing Library DOM smoke；
+- API client OpenAPI 生成 / TypeScript check CI 化；
+- keychain token 写入 / 恢复 / 清理 mock；
+- Workspace list 渲染；
+- Workspace state resources / members / sessions 关键字段；
+- 401 启动恢复触发 logout state；
+- register 201 后 token 写入。
 
 ## P2 - Runtime Integration
 

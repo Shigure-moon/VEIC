@@ -85,12 +85,13 @@ Updated: 2026-07-13
 | Workspace Search | Implemented first local read-only pass |
 | Command Palette | Implemented first local intent pass |
 | Runtime Records | Implemented read-only Workspace Search source |
+| UI smoke tests | Implemented Vitest first pass |
 | C4 documentation | SVG diagrams are the primary rendered diagrams |
 
 Progress estimate:
 
-- Current `soft` desktop MVP: about 52%.
-- Full P3 Agent Runtime desktop vision: about 30%.
+- Current `soft` desktop MVP: about 55%.
+- Full P3 Agent Runtime desktop vision: about 31%.
 
 ## Milestones
 
