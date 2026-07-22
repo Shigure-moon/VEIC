@@ -180,7 +180,7 @@ export function BayerBackground({ mode = 'quality' }: BayerBackgroundProps) {
       gl.uniform2f(resolution, canvas.width, canvas.height)
       gl.uniform1f(time, elapsed)
       gl.uniform1f(pixelSize, 4.0)
-      gl.uniform3f(color, 0.84, 0.84, 0.84)
+      gl.uniform3f(color, 0.92, 0.92, 0.92)
       gl.drawArrays(gl.TRIANGLES, 0, 3)
       frameId = window.requestAnimationFrame(render)
     }
@@ -201,7 +201,7 @@ export function BayerBackground({ mode = 'quality' }: BayerBackgroundProps) {
   }, [mode])
 
   const style = {
-    '--veic-bayer-ink': '#d8d8d8',
+    '--veic-bayer-ink': '#ececec',
   } as CSSProperties
 
   return <div className={`veic-bayer-background is-${mode}`} ref={hostRef} style={style} aria-hidden="true" />
