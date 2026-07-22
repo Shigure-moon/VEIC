@@ -1,0 +1,23 @@
+{
+  "framework": "vite",
+  "installCommand": "npm ci",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "redirects": [
+    {
+      "source": "/contact",
+      "destination": "https://api.veic.tech/contact",
+      "permanent": false
+    },
+    {
+      "source": "/api/contact",
+      "destination": "https://api.veic.tech/api/contact",
+      "permanent": false
+    },
+    {
+      "source": "/healthz-contact",
+      "destination": "https://api.veic.tech/healthz-contact",
+      "permanent": false
+    }
+  ]
+}
