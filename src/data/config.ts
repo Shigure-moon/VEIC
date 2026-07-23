@@ -27,13 +27,6 @@ export const CONFIG = {
   },
 
   // ---------------------------------------------------------------------------
-  // Blog Settings
-  // ---------------------------------------------------------------------------
-  blog: {
-    postsPerPage: 10,
-  },
-
-  // ---------------------------------------------------------------------------
   // Font Settings
   // See https://fontsource.org/?variable=true for fonts that can be installed via package registry
   // To change fonts:
